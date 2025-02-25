@@ -23,3 +23,26 @@ VALID_DATA = {
     "email": fake.email(),
     "password": fake.password()
 }
+
+INVALID_DATA = {
+    "first_name": "",
+    "last_name": "",
+    "email": "email",
+    "password": "test",
+    "password_conf": "Test"
+}
+MESSAGES = {
+    "successful_registration": "Thank you for registering with Main "
+                               "Website Store.",
+    "required_field": "This is a required field.",
+    "enter_valid_email": "Please enter a valid email address "
+                         "(Ex: johndoe@domain.com).",
+    "pass_strength_weak": "Weak",
+    "pass_strength_medium": "Medium",
+    "pass_strength_strong": "Strong",
+    "pass_strength_very_strong": "Very Strong",
+    "minimum_pass_length": "Minimum length of this field must be equal or "
+                           "greater than 8 symbols. Leading and trailing "
+                           "spaces will be ignored.",
+    "password_mismatch": "Please enter the same value again."
+}
