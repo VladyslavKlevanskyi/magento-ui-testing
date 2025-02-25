@@ -37,6 +37,7 @@ MESSAGES = {
     "required_field": "This is a required field.",
     "enter_valid_email": "Please enter a valid email address "
                          "(Ex: johndoe@domain.com).",
+    "pass_strength_no_pass": "No Password",
     "pass_strength_weak": "Weak",
     "pass_strength_medium": "Medium",
     "pass_strength_strong": "Strong",
@@ -46,3 +47,25 @@ MESSAGES = {
                            "spaces will be ignored.",
     "password_mismatch": "Please enter the same value again."
 }
+
+INVALID_EMAIL = [
+    ("Empty", ("", MESSAGES["required_field"])),
+    ("Without local part", ("@domain.com", MESSAGES["enter_valid_email"])),
+    ("Without @", ("domain.com", MESSAGES["enter_valid_email"])),
+    ("Without domain name", ("johndoe@.com", MESSAGES["enter_valid_email"])),
+    ("Without dot", ("johndoe@domaincom", MESSAGES["enter_valid_email"])),
+    ("Without domain zone", (
+        "johndoe@domain.", MESSAGES["enter_valid_email"]
+    )),
+    ("Only one letter in the domain zone", (
+        "johndoe@domain.c", MESSAGES["enter_valid_email"]
+    )),
+]
+
+PASS_STRENGTH = [
+    ("No Password", ("", MESSAGES["pass_strength_no_pass"])),
+    ("Weak", ("123", MESSAGES["pass_strength_weak"])),
+    ("Medium", ("123_test", MESSAGES["pass_strength_medium"])),
+    ("Strong", ("123_test1", MESSAGES["pass_strength_strong"])),
+    ("Very Strong", ("123_TesT_123", MESSAGES["pass_strength_very_strong"])),
+]

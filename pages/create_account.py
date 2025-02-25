@@ -1,3 +1,4 @@
+from selenium.webdriver import Keys
 from data import CREATE_ACCOUNT_URL
 from pages.base_page import BasePage
 from pages.locator import create_account_locators as locators
@@ -10,10 +11,10 @@ class CreateAccount(BasePage):
 
     def fill_out_and_submit_form(
             self,
-            first_name: str,
-            last_name: str,
-            email: str,
-            password: str,
+            first_name: str = None,
+            last_name: str = None,
+            email: str = None,
+            password: str = None,
             password_confirmation: str = None,
     ) -> None:
         if password_confirmation is None:
@@ -27,12 +28,21 @@ class CreateAccount(BasePage):
         )
         submit_button = self.find(locator=locators.submit_button)
 
-        first_name_field.send_keys(first_name)
-        last_name_field.send_keys(last_name)
-        email_field.send_keys(email)
-        password_field.send_keys(password)
-        password_confirmation_field.send_keys(password_confirmation)
+        if first_name:
+            first_name_field.send_keys(first_name)
+        if last_name:
+            last_name_field.send_keys(last_name)
+        if email:
+            email_field.send_keys(email)
+        if password:
+            password_field.send_keys(password)
+            password_confirmation_field.send_keys(password_confirmation)
         submit_button.click()
+
+    def fill_out_password_field(self, password: str):
+        password_field = self.find(locator=locators.password)
+        password_field.send_keys(password)
+        password_field.send_keys(Keys.TAB)
 
     def check_successful_account_creation_alert_is(self, text):
         alert = self.find(locator=locators.successful_registration_alert)
@@ -53,4 +63,3 @@ class CreateAccount(BasePage):
         elif field_name == "Pass Confirmation":
             alert = self.find(locator=locators.password_conf_alert)
         assert alert.text == message
-

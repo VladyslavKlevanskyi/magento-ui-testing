@@ -10,7 +10,7 @@ from pages.create_account import CreateAccount
 def driver():
     chrome_driver = webdriver.Chrome()
     chrome_driver.maximize_window()
-    chrome_driver.implicitly_wait(5)
+    chrome_driver.implicitly_wait(2)
     yield chrome_driver
     sleep(3)
     chrome_driver.quit()
