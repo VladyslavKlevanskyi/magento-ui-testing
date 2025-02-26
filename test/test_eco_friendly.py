@@ -27,7 +27,8 @@ def test_create_an_account_button_redirects_to_registration_page(
         collections_eco_friendly_page
 ):
     collections_eco_friendly_page.open_page()
-    collections_eco_friendly_page.check_create_an_account_button_functionality()
+    (collections_eco_friendly_page.
+     check_create_an_account_button_functionality())
 
 
 @pytest.mark.smoke

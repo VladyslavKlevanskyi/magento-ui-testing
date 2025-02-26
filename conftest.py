@@ -1,5 +1,3 @@
-from time import sleep
-
 import pytest
 
 from selenium import webdriver
@@ -12,13 +10,11 @@ from pages.sale import Sale
 @pytest.fixture()
 def driver():
     chrome_options = Options()
-    chrome_options.add_argument('start-maximized')
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_driver = webdriver.Chrome(options=chrome_options)
     chrome_driver.implicitly_wait(2)
     yield chrome_driver
-    sleep(3)
     chrome_driver.quit()
 
 
