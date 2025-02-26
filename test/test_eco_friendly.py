@@ -1,5 +1,33 @@
 import pytest
 from data import eco_friendly_data
+from data import product_data
+
+
+@pytest.mark.high
+def test_click_on_logo_redirects_to_home_page(collections_eco_friendly_page):
+    collections_eco_friendly_page.open_page()
+    collections_eco_friendly_page.check_logo_clickability()
+
+
+@pytest.mark.high
+def test_search_field_functionality(collections_eco_friendly_page):
+    collections_eco_friendly_page.open_page()
+    (collections_eco_friendly_page.
+        check_if_the_search_field_will_find_existing_product(
+            product_name=product_data.valid_product_name
+        ))
+    (collections_eco_friendly_page.
+        check_search_field_will_not_find_nonexistent_product(
+            product_name=product_data.invalid_product_name
+        ))
+
+
+@pytest.mark.high
+def test_create_an_account_button_redirects_to_registration_page(
+        collections_eco_friendly_page
+):
+    collections_eco_friendly_page.open_page()
+    collections_eco_friendly_page.check_create_an_account_button_functionality()
 
 
 @pytest.mark.smoke
