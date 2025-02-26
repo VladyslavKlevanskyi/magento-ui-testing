@@ -5,7 +5,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from data.urls import ECO_FRIENDLY_URL
 from pages.base_page import BasePage
-from pages.locator import eco_friendly_locators as locators
 from pages.locator import common_locators as comm_locators
 
 
@@ -15,20 +14,20 @@ class CollectionsEcoFriendly(BasePage):
         self.page_url = ECO_FRIENDLY_URL
 
     def check_number_of_products_is(self, number):
-        all_products = self.find_all(locators.product)
+        all_products = self.find_all(comm_locators.product)
         assert len(all_products) <= number
 
     def add_product_to_cart(self):
-        product = self.find(locators.product)
+        product = self.find(comm_locators.product)
         size_list = self.find_all(
             element=product,
-            locator=locators.size_element
+            locator=comm_locators.size_element
         )
         color_list = self.find_all(
             element=product,
-            locator=locators.color_element
+            locator=comm_locators.color_element
         )
-        add_to_cart_button = self.find(locators.add_to_cart_button)
+        add_to_cart_button = self.find(comm_locators.add_to_cart_button)
         actions = ActionChains(self.driver)
         actions.move_to_element(product)
         actions.move_to_element(size_list[0])
@@ -39,19 +38,19 @@ class CollectionsEcoFriendly(BasePage):
         actions.click()
         actions.perform()
         WebDriverWait(self.driver, 2).until(
-            EC.text_to_be_present_in_element(locators.counter_number, "1")
+            EC.text_to_be_present_in_element(comm_locators.counter_number, "1")
         )
-        counter_number = self.find(locators.counter_number)
+        counter_number = self.find(comm_locators.counter_number)
         assert counter_number.text == "1"
 
     def go_to_product_page(self):
-        all_products = self.find_all(locators.product)
+        all_products = self.find_all(comm_locators.product)
         random_product = all_products[
             random.randint(0, len(all_products) - 1)
         ]
         product_name = self.find(
             element=random_product,
-            locator=locators.product_name
+            locator=comm_locators.product_name
         ).text
         random_product.click()
         h1_text = self.find(comm_locators.tag_h1)
