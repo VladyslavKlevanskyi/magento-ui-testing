@@ -28,7 +28,7 @@ def test_search_field_functionality(sale_page):
     sale_page.check_if_the_search_field_will_find_existing_product(
         product_name=product_data.valid_product_name
     )
-    sale_page.check_if_the_search_field_will_not_find_nonexistent_product(
+    sale_page.check_search_field_will_not_find_nonexistent_product(
         product_name=product_data.invalid_product_name
     )
 

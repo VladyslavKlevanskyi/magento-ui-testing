@@ -53,7 +53,7 @@ class BasePage:
             f"but found {products[0].text}"
         )
 
-    def check_if_the_search_field_will_not_find_nonexistent_product(
+    def check_search_field_will_not_find_nonexistent_product(
             self, product_name: str
     ):
         search_field = self.find(locator=comm_locators.search_field)

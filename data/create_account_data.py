@@ -7,6 +7,8 @@ fake = Faker()
 
 load_dotenv()
 
+title = "Create New Customer Account"
+h1 = "Create New Customer Account"
 
 EXISTING_USER_DATA = {
     "first_name": os.getenv("first_name"),
