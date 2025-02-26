@@ -3,23 +3,16 @@ import random
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from data.urls import ECO_FRIENDLY_URL
 from pages.base_page import BasePage
 from pages.locator import eco_friendly_locators as locators
+from pages.locator import common_locators as comm_locators
 
 
 class CollectionsEcoFriendly(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.page_url = ECO_FRIENDLY_URL
-
-    def check_title_is(self, text):
-        assert self.driver.title == text
-
-    def check_h1_is(self, text):
-        h1 = self.find(locators.tag_h1)
-        assert h1.text == text
 
     def check_number_of_products_is(self, number):
         all_products = self.find_all(locators.product)
@@ -61,5 +54,5 @@ class CollectionsEcoFriendly(BasePage):
             locator=locators.product_name
         ).text
         random_product.click()
-        h1_text = self.find(locators.tag_h1)
+        h1_text = self.find(comm_locators.tag_h1)
         assert h1_text.text == product_name

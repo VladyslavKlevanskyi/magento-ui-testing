@@ -19,7 +19,7 @@ def test_the_possibility_to_go_to_the_product_page(
 @pytest.mark.medium
 def test_page_h1_header(collections_eco_friendly_page):
     collections_eco_friendly_page.open_page()
-    collections_eco_friendly_page.check_title_is(text=eco_friendly_data.title)
+    collections_eco_friendly_page.check_h1_is(text=eco_friendly_data.h1)
 
 
 @pytest.mark.low
