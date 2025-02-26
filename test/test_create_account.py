@@ -1,6 +1,6 @@
 import pytest
 
-from data import (
+from data.create_account_data import (
     VALID_DATA,
     INVALID_DATA,
     MESSAGES,

@@ -1,5 +1,5 @@
 from selenium.webdriver import Keys
-from data import CREATE_ACCOUNT_URL
+from data.urls import CREATE_ACCOUNT_URL
 from pages.base_page import BasePage
 from pages.locator import create_account_locators as locators
 

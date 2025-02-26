@@ -1,5 +1,5 @@
 from selenium.webdriver.remote.webdriver import WebDriver
-from data import BASE_URL
+from data.urls import BASE_URL
 
 
 class BasePage:
@@ -17,8 +17,12 @@ class BasePage:
                 "Page can not be opened for this page class"
             )
 
-    def find(self, locator: tuple):
-        return self.driver.find_element(*locator)
+    def find(self, locator: tuple, element: WebDriver = None):
+        if element is None:
+            return self.driver.find_element(*locator)
+        return element.find_element(*locator)
 
-    def find_all(self, locator: tuple):
-        return self.driver.find_elements(*locator)
+    def find_all(self, locator: tuple, element: WebDriver = None):
+        if element is None:
+            return self.driver.find_elements(*locator)
+        return element.find_elements(*locator)
