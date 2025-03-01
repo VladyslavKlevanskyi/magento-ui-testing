@@ -44,12 +44,14 @@ def test_search_field_functionality(create_account_page):
 @pytest.mark.smoke
 def test_create_account_with_valid_data(create_account_page):
     create_account_page.open_page()
-    create_account_page.fill_out_and_submit_form(
-        first_name=VALID_DATA["first_name"],
-        last_name=VALID_DATA["last_name"],
-        email=VALID_DATA["email"],
+    create_account_page.enter_first_name(first_name=VALID_DATA["first_name"])
+    create_account_page.enter_last_name(last_name=VALID_DATA["last_name"])
+    create_account_page.enter_email(email=VALID_DATA["email"])
+    create_account_page.enter_password(password=VALID_DATA["password"])
+    create_account_page.enter_password_confirmation(
         password=VALID_DATA["password"]
     )
+    create_account_page.click_create_an_account_button()
     create_account_page.check_successful_account_creation_alert_is(
         MESSAGES["successful_registration"]
     )
@@ -58,13 +60,14 @@ def test_create_account_with_valid_data(create_account_page):
 @pytest.mark.smoke
 def test_create_account_with_invalid_data(create_account_page):
     create_account_page.open_page()
-    create_account_page.fill_out_and_submit_form(
-        first_name=INVALID_DATA["first_name"],
-        last_name=INVALID_DATA["last_name"],
-        email=INVALID_DATA["email"],
-        password=INVALID_DATA["password"],
-        password_confirmation=INVALID_DATA["password_conf"]
+    create_account_page.enter_first_name(first_name=INVALID_DATA["first_name"])
+    create_account_page.enter_last_name(last_name=INVALID_DATA["last_name"])
+    create_account_page.enter_email(email=INVALID_DATA["email"])
+    create_account_page.enter_password(password=INVALID_DATA["password"])
+    create_account_page.enter_password_confirmation(
+        password=INVALID_DATA["password_conf"]
     )
+    create_account_page.click_create_an_account_button()
     create_account_page.check_field_alert_is(
         field_name="First Name",
         message=MESSAGES["required_field"]
@@ -94,10 +97,7 @@ def test_create_account_with_invalid_data(create_account_page):
 @pytest.mark.critical
 def test_first_and_last_name_fields_are_required(create_account_page):
     create_account_page.open_page()
-    create_account_page.fill_out_and_submit_form(
-        email=VALID_DATA["email"],
-        password=VALID_DATA["password"],
-    )
+    create_account_page.click_create_an_account_button()
     create_account_page.check_field_alert_is(
         field_name="First Name",
         message=MESSAGES["required_field"]
@@ -116,12 +116,8 @@ def test_first_and_last_name_fields_are_required(create_account_page):
 )
 def test_email_field_validation(create_account_page, email, message):
     create_account_page.open_page()
-    create_account_page.fill_out_and_submit_form(
-        first_name=VALID_DATA["first_name"],
-        last_name=VALID_DATA["last_name"],
-        email=email,
-        password=VALID_DATA["password"],
-    )
+    create_account_page.enter_email(email=email)
+    create_account_page.click_create_an_account_button()
     create_account_page.check_field_alert_is(
         field_name="Email",
         message=message
@@ -136,7 +132,7 @@ def test_email_field_validation(create_account_page, email, message):
 )
 def test_password_strength_validation(create_account_page, password, message):
     create_account_page.open_page()
-    create_account_page.fill_out_password_field(password=password)
+    create_account_page.enter_password(password=password)
     create_account_page.check_field_alert_is(
         field_name="Pass Strength",
         message=message

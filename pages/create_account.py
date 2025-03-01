@@ -9,40 +9,31 @@ class CreateAccount(BasePage):
         super().__init__(driver)
         self.page_url = CREATE_ACCOUNT_URL
 
-    def fill_out_and_submit_form(
-            self,
-            first_name: str = None,
-            last_name: str = None,
-            email: str = None,
-            password: str = None,
-            password_confirmation: str = None,
-    ) -> None:
-        if password_confirmation is None:
-            password_confirmation = password
+    def enter_first_name(self, first_name: str):
         first_name_field = self.find(locator=locators.first_name)
+        first_name_field.send_keys(first_name)
+
+    def enter_last_name(self, last_name: str):
         last_name_field = self.find(locator=locators.last_name)
+        last_name_field.send_keys(last_name)
+
+    def enter_email(self, email: str):
         email_field = self.find(locator=locators.email)
+        email_field.send_keys(email)
+
+    def enter_password(self, password: str):
         password_field = self.find(locator=locators.password)
+        password_field.send_keys(password)
+
+    def enter_password_confirmation(self, password: str):
         password_confirmation_field = self.find(
             locator=locators.password_confirmation
         )
+        password_confirmation_field.send_keys(password)
+
+    def click_create_an_account_button(self):
         submit_button = self.find(locator=locators.submit_button)
-
-        if first_name:
-            first_name_field.send_keys(first_name)
-        if last_name:
-            last_name_field.send_keys(last_name)
-        if email:
-            email_field.send_keys(email)
-        if password:
-            password_field.send_keys(password)
-            password_confirmation_field.send_keys(password_confirmation)
         submit_button.click()
-
-    def fill_out_password_field(self, password: str):
-        password_field = self.find(locator=locators.password)
-        password_field.send_keys(password)
-        password_field.send_keys(Keys.TAB)
 
     def check_successful_account_creation_alert_is(self, text):
         alert = self.find(locator=locators.successful_registration_alert)

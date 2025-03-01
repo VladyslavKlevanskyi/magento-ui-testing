@@ -65,7 +65,7 @@ INVALID_EMAIL = [
 PASS_STRENGTH = [
     ("No Password", ("", MESSAGES["pass_strength_no_pass"])),
     ("Weak", ("123", MESSAGES["pass_strength_weak"])),
-    ("Medium", ("123_test", MESSAGES["pass_strength_medium"])),
+    ("Medium", ("123_tes_", MESSAGES["pass_strength_medium"])),
     ("Strong", ("123_test1", MESSAGES["pass_strength_strong"])),
     ("Very Strong", ("123_TesT_123", MESSAGES["pass_strength_very_strong"])),
 ]
