@@ -35,9 +35,8 @@ class BasePage:
         h1 = self.find(comm_locators.tag_h1)
         assert h1.text == text
 
-    def check_logo_clickability(self):
+    def click_logo(self):
         self.find(comm_locators.logo).click()
-        assert self.driver.title == "Home Page"
 
     def check_if_the_search_field_will_find_existing_product(
             self, product_name: str
@@ -63,9 +62,8 @@ class BasePage:
         message = self.find(comm_locators.search_result_message)
         assert message.text == "Your search returned no results."
 
-    def check_create_an_account_button_functionality(self):
+    def click_create_an_account_button(self):
         create_account_button = self.find(
             locator=comm_locators.registration_button
         )
         create_account_button.click()
-        assert self.driver.title == "Create New Customer Account"

@@ -2,7 +2,6 @@ import random
 
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from data.urls import ECO_FRIENDLY_URL
 from pages.base_page import BasePage
 from pages.locator import common_locators as comm_locators
@@ -37,11 +36,14 @@ class CollectionsEcoFriendly(BasePage):
         actions.move_to_element(add_to_cart_button)
         actions.click()
         actions.perform()
+
+    def check_number_of_products_in_cart_is(self, number: int) -> None:
+        element = self.find(comm_locators.counter_number)
         WebDriverWait(self.driver, 2).until(
-            EC.text_to_be_present_in_element(comm_locators.counter_number, "1")
+            lambda d: element.text.strip() != ""
         )
         counter_number = self.find(comm_locators.counter_number)
-        assert counter_number.text == "1"
+        assert counter_number.text == str(number)
 
     def go_to_product_page(self):
         all_products = self.find_all(comm_locators.product)

@@ -6,7 +6,8 @@ from data import product_data
 @pytest.mark.high
 def test_click_on_logo_redirects_to_home_page(collections_eco_friendly_page):
     collections_eco_friendly_page.open_page()
-    collections_eco_friendly_page.check_logo_clickability()
+    collections_eco_friendly_page.click_logo()
+    collections_eco_friendly_page.check_title_is(text="Home Page")
 
 
 @pytest.mark.high
@@ -27,14 +28,17 @@ def test_create_an_account_button_redirects_to_registration_page(
         collections_eco_friendly_page
 ):
     collections_eco_friendly_page.open_page()
-    (collections_eco_friendly_page.
-     check_create_an_account_button_functionality())
+    collections_eco_friendly_page.click_create_an_account_button()
+    collections_eco_friendly_page.check_title_is(
+        text="Create New Customer Account"
+    )
 
 
 @pytest.mark.smoke
 def test_that_product_can_be_added_to_cart(collections_eco_friendly_page):
     collections_eco_friendly_page.open_page()
     collections_eco_friendly_page.add_product_to_cart()
+    collections_eco_friendly_page.check_number_of_products_in_cart_is(number=1)
 
 
 @pytest.mark.smoke

@@ -19,7 +19,8 @@ def test_page_title(sale_page):
 @pytest.mark.high
 def test_click_on_logo_redirects_to_home_page(sale_page):
     sale_page.open_page()
-    sale_page.check_logo_clickability()
+    sale_page.click_logo()
+    sale_page.check_title_is(text="Home Page")
 
 
 @pytest.mark.high
@@ -38,4 +39,5 @@ def test_create_an_account_button_redirects_to_registration_page(
     sale_page
 ):
     sale_page.open_page()
-    sale_page.check_create_an_account_button_functionality()
+    sale_page.click_create_an_account_button()
+    sale_page.check_title_is(text="Create New Customer Account")

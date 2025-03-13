@@ -27,7 +27,8 @@ def test_page_title(create_account_page):
 @pytest.mark.high
 def test_click_on_logo_redirects_to_home_page(create_account_page):
     create_account_page.open_page()
-    create_account_page.check_logo_clickability()
+    create_account_page.click_create_an_account_button()
+    create_account_page.check_title_is(text="Create New Customer Account")
 
 
 @pytest.mark.high
