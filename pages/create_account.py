@@ -53,14 +53,21 @@ class CreateAccount(BasePage):
 
     def enter_password(self, password: str) -> None:
         """
-        Enters the password into the password input field.
+        Enters the provided password into the password input field.
 
-        Args:
-            password (str): The user's chosen password.
+        This method types the password character by character to simulate
+        a more realistic user input. It finds the password field using the
+        predefined locator and sends the password characters sequentially.
+
+        :param password: The password string to be entered into the input field
         """
-        # Locate the password input field and enter the password
+        # Locate the password input field using the locator from locators
         password_field = self.find(locator=locators.password)
-        password_field.send_keys(password)
+
+        # Iterate through each character in the password and enter
+        # it into the field
+        for letter in password:
+            password_field.send_keys(letter)
 
     def enter_password_confirmation(self, password: str) -> None:
         """
