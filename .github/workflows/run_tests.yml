@@ -1,6 +1,18 @@
 name: Autotests
 
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: "Choose tests set"
+        required: true
+        default: "smoke"
+        type: choice
+        options:
+          - smoke
+          - regression
+          - extended
+          - all
 
 jobs:
   run-tests:
