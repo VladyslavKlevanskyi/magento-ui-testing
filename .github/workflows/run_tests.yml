@@ -4,11 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       deployment_target:
-        description: "Choose tests set"
+        description: Choose tests set
         required: true
         default: smoke
         type: choice
         options:
+          - all
           - smoke
           - critical
           - high
@@ -37,6 +38,26 @@ jobs:
       - name: Run flake8
         run: flake8
 
-      - name: Run tests
+      - name: Run all tests
+        if: "github.event.inputs.deployment_target == 'all'"
         run: pytest
       
+      - name: Run smoke tests
+        if: "github.event.inputs.deployment_target == 'smoke'"
+        run: pytest -m smoke
+
+      - name: Run critical tests
+        if: "github.event.inputs.deployment_target == 'critical'"
+        run: pytest -m critical
+
+      - name: Run high tests
+        if: "github.event.inputs.deployment_target == 'high'"
+        run: pytest -m high
+
+      - name: Run medium tests
+        if: "github.event.inputs.deployment_target == 'medium'"
+        run: pytest -m medium
+
+      - name: Run low tests
+        if: "github.event.inputs.deployment_target == 'low'"
+        run: pytest -m low
